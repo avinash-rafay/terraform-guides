@@ -6,7 +6,6 @@ terraform {
       version = "~> 3.27"
     }
   }
-  backend "s3" {}
 }
 
 provider "aws" {
@@ -23,13 +22,3 @@ resource "aws_instance" "ubuntu" {
   }
 }
 
-resource "aws_instance" "ubuntu-1" {
-  ami           = var.ami_id
-  instance_type = var.instance_type
-  availability_zone = var.aws_region_az
-
-  tags = {
-    Name = "avinash-terraform"
-  }
-  depends_on = [aws_instance.ubuntu]
-}
